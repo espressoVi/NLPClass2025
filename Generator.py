@@ -9,34 +9,29 @@ import numpy as np
 
 class LLM:
     """ LLM class implements inference """
-    def __init__(self, name = "./qwen3"):
+    def __init__(self, name = "./qwen25"):
         self.llm_path = name
         self.loaded = False
-        self.load_tokenizer()
-        self._init_config()
-
-    def load_tokenizer(self):
-        self.tokenizer = AutoTokenizer.from_pretrained(self.llm_path, trust_remote_code = True)
-        #self.tokenizer.unk_token = "<notrequired>" 
-        #self.tokenizer.sep_token = "<notrequired>"
-        self.tokenizer.pad_token = "<notrequired>"
-        self.tokenizer.cls_token = "<notrequired>"
-        self.tokenizer.mask_token = "<notrequired>"
-
-    def _init_config(self):
-        """ Inititalize generation config. """
+        # Load the tokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained(
+                            self.llm_path,
+                            trust_remote_code = True
+        )
+        # Inititalize generation config.
         self.generation_config = transformers.GenerationConfig(
                 do_sample = True,
                 max_new_tokens = 1024,
-                temperature    = 1,
+                temperature    = 0.99999,
                 top_k          = None,
                 top_p          = None,
                 num_return_sequences = 1,
                 pad_token_id = self.tokenizer.eos_token_id,
                 eos_token_id = self.tokenizer.eos_token_id,
+                bos_token_id = self.tokenizer.bos_token_id,
         )
 
     def load_model(self):
+        """ Method to make sure that the model is loaded exactly once."""
         if self.loaded: return
         self.model = AutoModelForCausalLM.from_pretrained(
                     self.llm_path,
@@ -70,8 +65,9 @@ class LLM:
                     tokenize = False,
                     enable_thinking = False,
         )
+        # Tokenize the input
         inputs = self.tokenizer.encode(prompt, return_tensors="pt")
-        input_token_length = len(inputs[0]) + 2 # Adjusts for automatic tokens
+        input_token_length = len(inputs[0]) #+ 2 # Adjusts for automatic tokens
 
         with torch.inference_mode():
             results = self.model.generate(
@@ -80,7 +76,9 @@ class LLM:
                 generation_config = self.generation_config,
             )
 
+        # Only take generated tokens (i.e., after input)
         completions = [result[input_token_length:] for result in results]
+        # De-tokenize
         completions = [
             self.tokenizer.decode(completion, skip_special_tokens=False) 
             for completion in completions

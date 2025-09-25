@@ -12,7 +12,9 @@ def main():
 
     llm = LLM()
     output = llm(prompt)
+    print()
     print(output[0])
+    print()
 
 
 if __name__ == "__main__":
