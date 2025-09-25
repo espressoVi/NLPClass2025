@@ -11,7 +11,7 @@ M.Tech, CS, Indian Statistical Institute, Kolkata.
 huggingface-cli download Qwen/Qwen3-8B --local-dir ./qwen3
 ```
 
->[!WARN]
+>[!WARNING]
 > The 8B LLM takes up a lot of VRAM. Maybe choose a smaller model (~1B) to run
 on modest hardware.
 
