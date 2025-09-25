@@ -19,11 +19,11 @@ class LLM:
         )
         # Inititalize generation config.
         self.generation_config = transformers.GenerationConfig(
-                do_sample = True,
-                max_new_tokens = 1024,
-                temperature    = 0.99999,
-                top_k          = None,
-                top_p          = None,
+                do_sample            = True,
+                max_new_tokens       = 1024,
+                temperature          = 0.99999,
+                top_k                = None,
+                top_p                = None,
                 num_return_sequences = 1,
                 pad_token_id = self.tokenizer.eos_token_id,
                 eos_token_id = self.tokenizer.eos_token_id,
