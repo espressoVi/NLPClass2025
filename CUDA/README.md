@@ -13,7 +13,7 @@ with GPUs.
 follows:
 
 ```
-$ gcc -o cpu cpu.c
+$ gcc -o cpu cpu.c -O3
 $ ./cpu
 ```
 
