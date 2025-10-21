@@ -4,6 +4,7 @@ qwen25/
 
 __pycache__/
 *.py[cod]
+*.o
 *$py.class
 *.swp
 .Python
