@@ -1,29 +1,26 @@
-# NLP Class 2025
+# Natural Language Processing 2025
 
-This repository contains code to demonstrate LLM inference for the NLP course,
-M.Tech, CS, Indian Statistical Institute, Kolkata.
+**M.Tech, Computer Science, Indian Statistical Institute, Kolkata.**
 
+This repository contains code corresponding to hands-on demonstrations in class.
 
-## Usage
+## Table of Contents
 
-* Download the requisite language model(s)
-```
-huggingface-cli download Qwen/Qwen3-8B --local-dir ./qwen3
-```
+  * LLMInference
+    This contains code to run inference with LLMs on your local GPU-powered
+    machine. Illustrates the effect of various generation parameters like
+    temperature, top-k, etc.
 
->[!WARNING]
-> The 8B LLM takes up a lot of VRAM. Maybe choose a smaller model (~1B) to run
-on modest hardware.
+  * Prompting
+    Just contains a _modern_ CoT prompt template. Use this as a starting point
+    to write your own.
 
-* Run the main script with your input.
+  * CUDA
+    A demo on CUDA programming and understanding the basics of GPU architecture.
 
-```
-python main.py
-```
-
-* Parameters can be edited in ```Generator.py```.
-
+> [!NOTE]
+> Please refer to the usage guide in each folder for further information.
 
 ## Contributor
 
-  - [Soumadeep Saha](https://espressovi.github.io)
+  * [Soumadeep Saha](https://espressovi.github.io)
