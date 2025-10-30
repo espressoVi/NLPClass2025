@@ -24,7 +24,7 @@ def get_text_from_url(url):
 
 def main():
     # Get search results based on the query.
-    search_results = get_search_results("Andor Season 3 wikipedia")
+    search_results = get_search_results("Andor Season 2 wikipedia")
     print(search_results)
     print()
 
